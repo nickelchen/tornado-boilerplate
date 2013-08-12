@@ -2,6 +2,7 @@
 import sys
 import tornado.web
 import tornado.auth
+
 from jinja2 import Template, Environment, FileSystemLoader
 from bson.objectid import ObjectId
 
@@ -104,7 +105,7 @@ class LoginHandler(BaseHandler):
             frm.render("login.html")
 
         self.set_secure_cookie("user_id", str(user.id))
-        self.redirect(self.get_argument("next","/"))
+        self.redirect("/")
 
 class RegisterHandler(BaseHandler):
     def get(self):
