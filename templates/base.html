@@ -3,57 +3,54 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css") }}" type="text/css" />
+  <link rel="stylesheet" href="{{ static_url("css/flat-ui.css") }}" type="text/css" />
   <link rel="stylesheet" href="{{ static_url("css/app.css") }}" type="text/css" />
    {% block styles %}{% endblock %} 
    <script type="text/javascript" src="{{ static_url("js/jquery.js") }}"></script>
    {% block scripts %}{% endblock %} 
 </head>
 <body>
-  <div id="header">
-    <div class="container">
-      <div class="left_wrapper">
-        <div id="site_name">
-          <a href="/">{{ settings['app_name'] }}</a>
-        </div>
-        <div id="add_ask">
-          <input type="text" placeholder="搜索问题, 话题 或 会员" />
-          <a href="/ask">我要提问</a>
-        </div>
-      </div>
-      <div class="sidebar">
-        <div id="user_bar">
-          <a href="/">首页</a>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">{{ settings['app_name'] }}</a>
+        <ul class="nav">
+          <li><a href="/">首页</a></li>
+        </ul>
+        <ul class="nav pull-right">
           {% if not current_user %}
-          <a href="/login">登陆</a>
-          <a href="/register">注册</a>
+          <li><a href="/login">登陆</a></li>
+          <li><a href="/register">注册</a></li>
           {% else %}
-          {{ current_user|user_name_tag }}
-          <a href="/settings">个人设置</a>
-          <a href="/logout">退出</a>
+          <li>{{ current_user|user_name_tag }} </li>
+          <li><a href="/settings">个人设置</a></li>
+          <li><a href="/logout">退出</a></li>
           {% endif %}
-        </div>
+        </ul>
       </div>
     </div>
   </div>
-  <div id="main">
-    <div class="container">
-      <div class="left_wrapper">
-        {% block body %}{% endblock %}
+
+  <div id="main" class="container">
+    <div class="row">
+      <div class="span9">
+        {% block body %}{% endblock %}  
       </div>
-      <div class="sidebar">
+      <div class="span3">
         {% block sidebar %}{% endblock %}
       </div>
     </div>
   </div>
-  <div id="footer">
-    <div class="container">
-      <div class="left_wrapper">
-        <p class="copyright">
-          &copy; {{ settings['app_name'] }}
-        </p>
-      </div>
-    </div>
-  </div>
+
+
+  <footer>
+    <center>
+      <p class="copyright">
+        &copy; {{ settings['app_name'] }}
+      </p>
+    </center>
+  </footer>
   {% block bottom %}{% endblock %}
 </body>
 </html>
