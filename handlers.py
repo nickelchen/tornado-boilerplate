@@ -1,7 +1,7 @@
 # coding: utf-8
+import os
 import sys
 import tornado.web
-import tornado.auth
 
 from jinja2 import Template, Environment, FileSystemLoader
 from bson.objectid import ObjectId
@@ -16,6 +16,7 @@ class BaseHandler(tornado.web.RequestHandler):
         tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
         self.session = session.TornadoSession(application.session_manager, self)
         self._title = self.settings['app_name']
+
 
     def render_string(self,template,**args):
         env = Environment(loader=FileSystemLoader(self.settings['template_path']))
@@ -92,11 +93,11 @@ class LoginHandler(BaseHandler):
 
     def post(self):
         self.set_title(u"登陆")
+        # import pdb; pdb.set_trace();
         frm = LoginForm(self)
         if not frm.validate():
             frm.render("login.html")
             return
-
         password = utils.md5(frm.password)
         user = User.objects(login=frm.login,
                             password=password).first()
@@ -111,7 +112,7 @@ class RegisterHandler(BaseHandler):
     def get(self):
         self.set_title(u"注册")
         user = User()
-        self.render("register.html", user=user)
+        self.render("register.html")
 
     def post(self):
         self.set_title(u"注册")
@@ -119,7 +120,6 @@ class RegisterHandler(BaseHandler):
         if not frm.validate():
             frm.render("register.html")
             return
-        
         user = User(name=frm.name,
                     login=frm.login,
                     email=frm.email,
