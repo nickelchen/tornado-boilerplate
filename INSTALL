@@ -1,4 +1,4 @@
-sudo easy_install Jinja2
-sudo easy_install mongoengine
-sudo easy_install formencode
-
+BAE 环境的版本
+torndo + mongodb + mongoengine(ORM)
+第三方库放在 bundle 文件夹中
+在 index.py 中设置你自己的变量, 比如 YOUR COOKIE SECRET   YOUR SESSION SECRET 等等
