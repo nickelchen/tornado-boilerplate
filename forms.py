@@ -1,6 +1,6 @@
 # coding: utf-8
 import re
-import logging  
+import logging
 import urlparse
 import formencode
 from formencode import htmlfill, validators
@@ -8,13 +8,13 @@ from formencode import htmlfill, validators
 
 class BaseForm(formencode.Schema):
     """
-    by Felinx Lee 
+    by Felinx Lee
     https://bitbucket.org/felinx/poweredsites/src/8448db5ba387/poweredsites/forms/base.py
     """
     allow_extra_fields = True
     filter_extra_fields = True
 
-    _xsrf = validators.PlainText(not_empty=True, max=32)
+    _xsrf = validators.String(not_empty=True, max=100)
 
     def __init__(self, handler, form_id = None):
 
@@ -55,7 +55,7 @@ class BaseForm(formencode.Schema):
 
         # map values to define form propertys and decode utf8
         for k in self._values.keys():
-            exec("self.%s = self._values[\"%s\"].decode('utf8')" % (k,k)) 
+            exec("self.%s = self._values[\"%s\"].decode('utf8')" % (k,k))
 
         return self._result
 

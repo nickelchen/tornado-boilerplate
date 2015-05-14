@@ -28,10 +28,10 @@ class Application(tornado.web.Application):
             (r"/logout", LogoutHandler),
         ]
         settings = dict(
-            app_name=u"App website",
+            app_name=u"屌爆网站",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            xsrf_cookies=True,
+            xsrf_cookies=False,
             cookie_secret="81o0TzKaPpGtYdkL5gEmGepeuuYi7EPnp2XdTP1o&Vo=",
             login_url="/login",
             session_secret='08091287&^(01',

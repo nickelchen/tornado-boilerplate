@@ -1,1 +1,3 @@
-Torando bootstrap.
+Torando + foundation css + mongo.
+
+just basic functionality: register & login

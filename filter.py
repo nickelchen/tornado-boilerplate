@@ -14,7 +14,7 @@ def tags_name_tag(tags,limit = 0):
 
 def user_name_tag(user):
     return '<a href="/%s" class="user">%s</a>' % (user.login,user.name)
-        
+
 def strftime(value, type='normal'):
     if type == 'normal':
         format="%Y-%m-%d %H:%M"
@@ -40,8 +40,9 @@ def inlist(value,list):
     return false
 
 def avatar(user, size = 40):
-    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(user.email).hexdigest() +  "?" 
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(user.email).hexdigest() +  "?"
     gravatar_url += urllib.urlencode({'s':str(size)})
+    gravatar_url = 'http://www.baidu.com/a.jpg'
     return "<a href=\"/%s\" class=\"avatar\"><img src=\"%s\" style=\"width:%dpx;\" title=\"%s\" /></a>" % (user.login,gravatar_url,size,user.name)
 
-    
+

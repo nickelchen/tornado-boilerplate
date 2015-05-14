@@ -3,41 +3,84 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css") }}" type="text/css" />
-  <link rel="stylesheet" href="{{ static_url("css/flat-ui.css") }}" type="text/css" />
+  <link rel="stylesheet" href="{{ static_url("css/foundation-5.5.2/css/normalize.css") }}" type="text/css" />
+  <link rel="stylesheet" href="{{ static_url("css/foundation-5.5.2/css/foundation.css") }}" type="text/css" />
+
   <link rel="stylesheet" href="{{ static_url("css/app.css") }}" type="text/css" />
-   {% block styles %}{% endblock %} 
-   <script type="text/javascript" src="{{ static_url("js/jquery.js") }}"></script>
-   {% block scripts %}{% endblock %} 
+
+  {% block styles %}{% endblock %}
+
+  <script type="text/javascript" src="{{ static_url("libs/foundation-5.5.2/js/vendor/modernizr.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("libs/foundation-5.5.2/js/vendor/jquery.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("libs/foundation-5.5.2/js/foundation/foundation.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("libs/foundation-5.5.2/js/foundation/foundation.topbar.js") }}"></script>
+
+  {% block scripts %}{% endblock %}
+
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="/">{{ settings['app_name'] }}</a>
-        <ul class="nav">
-          <li><a href="/">首页</a></li>
-        </ul>
-        <ul class="nav pull-right">
-          {% if not current_user %}
-          <li><a href="/login">登陆</a></li>
-          <li><a href="/register">注册</a></li>
-          {% else %}
-          <li>{{ current_user|user_name_tag }} </li>
-          <li><a href="/settings">个人设置</a></li>
-          <li><a href="/logout">退出</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-  </div>
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">{{ settings['app_name'] }}</a></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+
+        {% if current_user %}
+          <li class="has-dropdown">
+            <a href="#">{{ current_user.name }}</a>
+            <ul class="dropdown">
+              <li><a href="/settings">个人设置</a></li>
+              <li><a href="/logout">退出</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li class="has-dropdown">
+            <a href="#">欢迎光临</a>
+            <ul class="dropdown">
+              <li><a href="/login">登录</a></li>
+              <li><a href="/register">注册</a></li>
+            </ul>
+          </li>
+        {% endif %}
+
+      </ul>
+
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="has-dropdown">
+          <a href="#">我的项目</a>
+          <ul class="dropdown">
+            <li><a href="#">项目1</a></li>
+            <li><a href="#">项目2</a></li>
+          </ul>
+        </li>
+
+        <li class="has-dropdown">
+          <a href="#">我的课程</a>
+          <ul class="dropdown">
+            <li><a href="#">课程1</a></li>
+            <li><a href="#">课程2</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </section>
+  </nav>
+
 
   <div id="main" class="container">
     <div class="row">
-      <div class="span9">
-        {% block body %}{% endblock %}  
+      <div class="small-9 columns">
+        {% block body %}{% endblock %}
       </div>
-      <div class="span3">
+      <div class="small-3 columns">
         {% block sidebar %}{% endblock %}
       </div>
     </div>
@@ -51,6 +94,13 @@
       </p>
     </center>
   </footer>
+
+  <script>
+    $(document).foundation();
+  </script>
+
   {% block bottom %}{% endblock %}
+
+
 </body>
 </html>

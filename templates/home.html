@@ -2,7 +2,8 @@
 
 {% block body %}
 <div id="asks">
-  <h3>This is content body!</h3>
+  <h3>内容区域要大大大大</h3>
+
   {% for item in asks %}
   <div class="ask">
     <div class="title"><a href="/ask/{{ item.id }}">{{ item.title|e }}</a></div>
@@ -20,7 +21,7 @@
 
 
 {% block sidebar %}
-<h3>This is sidebar!</h3>
+<h3>侧边栏要酷酷酷酷</h3>
 {% if current_user %}
 <div class="box">
   {{ current_user|avatar(120) }}
